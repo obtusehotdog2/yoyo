@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I love you princess! ❤</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #intro {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: pink;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            z-index: 10;
+            transition: opacity 1s ease;
+            cursor: pointer;
+        }
+
+        .hearts {
+            position: absolute;
+            font-size: 1.5em;
+            animation: float 3s infinite;
+        }
+
+        .heart1 { top: 10%; left: 5%; }
+        .heart2 { top: 50%; right: 5%; }
+        .heart3 { bottom: 10%; left: 15%; }
+        .heart4 { bottom: 20%; right: 10%; }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        #main-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10%;
+            font-size: 1.5em;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        .lights {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            background: transparent;
+            z-index: 0;
+        }
+
+        .light-string {
+            width: 100%;
+            height: 10px;
+            background-color: black;
+            border-radius: 5px;
+            position: absolute;
+            top: 40px;
+        }
+
+        .light {
+            width: 20px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            position: relative;
+            transform: rotate(-15deg);
+            margin: 0 8px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+            animation: blink 1.5s infinite alternate;
+        }
+
+        .light:nth-child(2) { background-color: green; }
+        .light:nth-child(3) { background-color: blue; }
+        .light:nth-child(4) { background-color: yellow; }
+        .light:nth-child(5) { background-color: orange; }
+        .light:nth-child(6) { background-color: purple; }
+        .light:nth-child(7) { background-color: pink; }
+        .light:nth-child(8) { background-color: white; }
+        .light:nth-child(9) { background-color: teal; }
+        .light:nth-child(10) { background-color: gold; }
+        .light:nth-child(11) { background-color: brown; }
+        .light:nth-child(12) { background-color: cyan; }
+        .light:nth-child(13) { background-color: lime; }
+        .light:nth-child(14) { background-color: magenta; }
+        .light:nth-child(15) { background-color: coral; }
+        .light:nth-child(16) { background-color: violet; }
+        .light:nth-child(17) { background-color: lightblue; }
+        .light:nth-child(18) { background-color: peach; }
+        .light:nth-child(19) { background-color: indigo; }
+        .light:nth-child(20) { background-color: chartreuse; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .present-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .present {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff69b4, #9b59b6);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            z-index: 5;
+        }
+
+        .ribbon {
+            width: 100%;
+            height: 20px;
+            background-color: pink;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .ribbon-vertical {
+            width: 20px;
+            height: 100%;
+            background-color: pink;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .bow {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            background-color: pink;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bow:before, .bow:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background-color: pink;
+            border-radius: 5px;
+        }
+
+        .bow:before {
+            transform: rotate(45deg);
+        }
+
+        .bow:after {
+            transform: rotate(-45deg);
+        }
+
+        .slab {
+            width: 100%;
+            height: 25%;
+            background-color: pink;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 10px 10px 0 0;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .present.open .slab {
+            transform: translateY(-100%);
+        }
+
+        .lid {
+            position: absolute;
+            width: 100%;
+            height: 25%;
+            background-color: pink;
+            top: -25px;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .present.open .lid {
+            transform: translateX(200px);
+        }
+
+        .present img {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+
+        .side-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 100px;
+        }
+
+        .cat {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background-image: url('https://cdn.discordapp.com/attachments/1386443583607017595/1483247718083334266/cat_holding.jfif?ex=69b9e595&is=69b89415&hm=b57112e4735fc1fd2f979e72164f9b0affe8ac3ed43db78c721c35377eeda65e');
+            background-size: cover;
+            visibility: hidden;
+            z-index: 999;
+            transition: visibility 0s, opacity 0.5s ease-in-out;
+        }
+
+        @keyframes jump {
+            0% {
+                transform: translateY(0) translateX(-50%);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-150px) translateX(-50%);
+            }
+            100% {
+                transform: translateY(0) translateX(-50%);
+                opacity: 1;
+            }
+        }
+
+        .present:active {
+            transform: scale(1.1);
+        }
+
+        .love-heart {
+            position: fixed;
+            font-size: 3em;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .heart-left {
+            left: 20px;
+            top: 50%;
+            display: none;
+        }
+
+        .heart-right {
+            right: 20px;
+            top: 50%;
+            display: none;
+        }
+
+        .love-heart:active {
+            transform: scale(1.2);
+        }
+
+        #loveMessage {
+            position: absolute;
+            bottom: 50px;
+            font-size: 2em;
+            color: pink;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-weight: bold;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .shooting-heart {
+            position: absolute;
+            font-size: 2em;
+            animation: shootHeart 1s forwards;
+        }
+
+        @keyframes shootHeart {
+            0% {
+                transform: scale(1) translateY(0) translateX(0);
+            }
+            100% {
+                transform: scale(0) translateY(-200px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .card-container {
+            perspective: 1000px;
+            position: absolute;
+        }
+
+        .card-container.left {
+            left: 220px;
+            bottom: 50px;
+        }
+
+        .card-container.right {
+            right: 220px;
+            bottom: 50px;
+        }
+
+        .card {
+            width: 300px;
+            height: 200px;
+            background-color: pink;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content {
+            text-align: center;
+            font-size: 1.5em;
+            color: white;
+            backface-visibility: hidden;
+            position: absolute;
+        }
+
+        .card-front {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-back {
+            background-color: #ff69b4;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="intro" onclick="fadeOutIntro()">
+        Happy birthday princess <3
+        <div class="hearts heart1">💕</div>
+        <div class="hearts heart2">💕</div>
+        <div class="hearts heart3">💕</div>
+        <div class="hearts heart4">💕</div>
+    </div>
+
+    <div id="main-content">
+        <div class="lights">
+            <div class="light-string"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+            <div class="light"></div>
+        </div>
+
+        <div class="present-container">
+            <img src="https://cdn.discordapp.com/attachments/1386443583607017595/1483245620398395493/IMG_6151.png?ex=69b9e3a1&is=69b89221&hm=b1495a60f242cc4fd4d89c66295089caa36b7c010e467a4847340484916f4c9e&" class="side-image" alt="Left Image">
+            <div class="present" id="present">
+                <div class="lid"></div>
+                <div class="ribbon"></div>
+                <div class="ribbon-vertical"></div>
+                <div class="bow"></div>
+                <div class="cat" id="cat"></div>
+            </div>
+            <img src="https://cdn.discordapp.com/attachments/1386443583607017595/1483245620717420724/IMG_6139.png?ex=69b9e3a1&is=69b89221&hm=6ca5d7fe76028f56750b4c1cd32d4f22941ba7e786d0fff20b8385ca0f8c994e&" class="side-image" alt="Right Image">
+        </div>
+
+        <div id="loveMessage">I love you Savanna 💗</div>
+
+        <div class="love-heart heart-left" onclick="animateHeart('left')">💖</div>
+        <div class="love-heart heart-right" onclick="animateHeart('right')">💖</div>
+
+        <div class="card-container left">
+            <div class="card" id="card-left">
+                <div class="card-content card-front">
+                    Click me too bunnyy
+                </div>
+                <div class="card-content card-back">
+                    I hope you have the best birthday, I love you💝
+                </div>
+            </div>
+        </div>
+        <div class="card-container right">
+            <div class="card" id="card-right">
+                <div class="card-content card-front">
+                    Hii beautiful click me 💞
+                </div>
+                <div class="card-content card-back">
+                    You have my whole heart💕
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="sound" src="https://cdn.discordapp.com/attachments/1386443583607017595/1483242990825898195/The_Neighbourhood_-_Baby_Came_Home_2___Valentines_Lyrics_dont_just_sit_in_front_of_me.mp3?ex=69b9e12e&is=69b88fae&hm=e32b71a38dd9c3e89be675d6dfa91519cff7afd72dc7e5e93198e6d1d4b89322&" preload="auto"></audio>
+
+    <script>
+        function fadeOutIntro() {
+            const intro = document.getElementById('intro');
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.style.display = 'none';
+                document.getElementById('main-content').style.display = 'flex';
+                document.querySelector('.heart-left').style.display = 'block';
+                document.querySelector('.heart-right').style.display = 'block';
+                
+            }, 1000);
+        }
+
+        document.getElementById('present').addEventListener('click', function() {
+            this.classList.toggle('open');
+            const cat = document.getElementById('cat');
+            const loveMessage = document.getElementById('loveMessage');
+            const sound = document.getElementById('sound');
+
+            sound.play();
+
+            cat.style.visibility = 'visible';
+            cat.style.opacity = '1';
+            loveMessage.style.opacity = '1';
+            loveMessage.textContent = "Happy birthday cutie😼";
+
+            setTimeout(function() {
+                cat.style.animation = "jump 1s";
+            }, 500);
+        });
+
+        function animateHeart(side) {
+            const heart = document.querySelector(`.heart-${side}`);
+            const emojis = ['💖', '💕', '💞', '💗'];
+            for (let i = 0; i < 5; i++) {
+                let shootingHeart = document.createElement('div');
+                shootingHeart.classList.add('shooting-heart');
+                shootingHeart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(shootingHeart);
+
+                let offsetX = Math.random() * 200 - 100;
+                let offsetY = Math.random() * -50 - 50;
+
+                shootingHeart.style.left = `${heart.offsetLeft + offsetX}px`;
+                shootingHeart.style.bottom = `${heart.offsetTop + offsetY}px`;
+
+                setTimeout(() => {
+                    shootingHeart.remove();
+                }, 1000);
+            }
+        }
+
+
+
+        document.getElementById('card-left').addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+
+        document.getElementById('card-right').addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+    </script>
+</body>
+</html>
